@@ -11,7 +11,8 @@ import {
   Button,
   IconButton,
 } from '@chakra-ui/react';
-import { CalendarDays, ChevronLeft, ChevronRight, Plus, UserPlus } from 'lucide-react';
+import { CalendarDays, ChevronLeft, ChevronRight, Plus, UserPlus, Users } from 'lucide-react';
+import NextLink from 'next/link';
 import { Profile, canManageEmployees, canManageTasks } from '@/types/database';
 import { CollaboratorSelect } from './CollaboratorSelect';
 
@@ -222,6 +223,29 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
             selectedUserId={selectedUserId}
             onSelectUserChange={onSelectUserChange}
           />
+        )}
+
+        {/* Botão Gestão de Funcionários (Apenas Administrador) */}
+        {isAdmin && (
+          <NextLink href="/funcionarios" style={{ textDecoration: 'none' }}>
+            <Button
+              size="sm"
+              variant="outline"
+              borderColor="gray.300"
+              bg="white"
+              color="gray.700"
+              _hover={{ bg: 'gray.50', borderColor: 'gray.400' }}
+              boxShadow="0 1px 2px rgba(0, 0, 0, 0.05)"
+              fontWeight="semibold"
+              px={3.5}
+              borderRadius="full"
+            >
+              <HStack gap={1.5}>
+                <Users size={16} color="#4f46e5" />
+                <Text as="span">Funcionários</Text>
+              </HStack>
+            </Button>
+          </NextLink>
         )}
 
         {/* Botão Novo Funcionário (Apenas Administrador) */}

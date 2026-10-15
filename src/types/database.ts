@@ -7,6 +7,11 @@ export interface Profile {
   created_at: string;
 }
 
+export interface CollaboratorWithEmail extends Profile {
+  email?: string;
+  tasksCount?: number;
+}
+
 // Funções utilitárias de permissão
 export function canManageEmployees(role?: UserRole | null): boolean {
   return role === 'admin';

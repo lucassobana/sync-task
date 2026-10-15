@@ -2,11 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { Flex, Image, Box, Text, Button } from '@chakra-ui/react';
-import { Calendar, LogOut, User } from 'lucide-react';
+import { Calendar, LogOut, User, Users } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import NextLink from 'next/link';
 import { createClient } from '@/lib/supabase/client';
-import { Profile } from '@/types/database';
+import { Profile, canManageEmployees } from '@/types/database';
 
 export default function Header() {
   const pathname = usePathname();
@@ -111,6 +111,32 @@ export default function Header() {
             Painel do Calendário
           </Flex>
         </NextLink>
+
+        {canManageEmployees(profile?.role) && (
+          <NextLink href="/funcionarios" style={{ textDecoration: 'none' }}>
+            <Flex
+              align="center"
+              gap={2}
+              px={4}
+              py={2}
+              borderRadius="lg"
+              fontSize="sm"
+              fontWeight={pathname === '/funcionarios' ? '600' : '500'}
+              bg={pathname === '/funcionarios' ? 'gray.800' : 'transparent'}
+              border="1px"
+              borderColor={pathname === '/funcionarios' ? 'gray.700' : 'transparent'}
+              color={pathname === '/funcionarios' ? 'white' : 'gray.400'}
+              _hover={{ bg: 'gray.800', color: 'white' }}
+              transition="all 0.2s"
+            >
+              <Users
+                size={16}
+                color={pathname === '/funcionarios' ? '#818cf8' : '#94a3b8'}
+              />
+              Funcionários
+            </Flex>
+          </NextLink>
+        )}
       </Flex>
 
       {/* Perfil e Ações (Direita) */}
