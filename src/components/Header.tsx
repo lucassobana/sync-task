@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Flex, Image, Box, Text, Button } from '@chakra-ui/react';
-import { Calendar, LogOut } from 'lucide-react';
+import { Calendar, LogOut, User } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import NextLink from 'next/link';
 import { createClient } from '@/lib/supabase/client';
@@ -126,6 +126,19 @@ export default function Header() {
             px={3.5}
             py={1.5}
           >
+            <Flex
+              align="center"
+              justify="center"
+              w="24px"
+              h="24px"
+              borderRadius="full"
+              bg="gray.700"
+              color="brand.400"
+              flexShrink={0}
+            >
+              <User size={14} />
+            </Flex>
+
             <Text fontSize="xs" fontWeight="medium" color="gray.200">
               {profile.full_name}
             </Text>
